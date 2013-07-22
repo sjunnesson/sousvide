@@ -11,6 +11,7 @@ Hardware:
 4,7k resistor  
 [Arduino Duemilanove](http://arduino.cc/en/Main/ArduinoBoardDuemilanove)  
 The heating source is a slow cooker of basically any "dumb" type. No digital controlls just a "Low, High" heat setting that turns on and off if you pull the plug out from the wall.  
+[Extension cord](http://www.amazon.com/gp/product/B0073AADTI/ref=oh_details_o00_s00_i00?ie=UTF8&psc=1)   
 
 
 
