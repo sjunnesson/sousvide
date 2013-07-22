@@ -1,3 +1,19 @@
+/*
+Sous vide controller:
+Switches a solid state relay on and off tightly
+controlling the temperature of the water bath. 
+Test runs has given a +-1 degrees Celsius precision over multiple hours
+using a slowcooker as heat source.
+
+PID library from: 
+Brett Beauregard <br3ttb@gmail.com>
+https://github.com/br3ttb/Arduino-PID-Library/
+
+DS1820 implementation from:
+bildr 
+http://bildr.org/2011/07/ds18b20-arduino/ 
+*/
+
 
 #include <PID_v1.h>
 #include <OneWire.h> 
@@ -7,8 +23,8 @@
 unsigned long serialMillis=0;
 int serialFreq=600;
 
-int DS18S20_Pin = 6; //DS18S20 Signal pin on digital 2
-OneWire ds(DS18S20_Pin);  // on digital pin 2
+int DS18S20_Pin = 6; //DS18S20 Signal pin on digital 6
+OneWire ds(DS18S20_Pin); 
 
 
 //Define Variables we'll be connecting to
