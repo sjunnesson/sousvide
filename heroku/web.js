@@ -6,23 +6,19 @@ var https = require('https');
 
 
 // PARSE variables 
-var APP_ID = 'ww6FQ3CumG9kHfrR6DYZUTLMH6d6Dbvg0EBeHC8o';
-var REST_API_KEY = 's0L4ELQK3RvjCv1mUl1lJTHS3coKJfXICRZvKh3l';
-var UPDATE_INTERVAL = 10000;
+var APP_ID = 'QvJbOzUIMLphGxYkonhtzfsa28udV7n58155MnHU';
+var REST_API_KEY = 'C6oYtNXc7Hd135iLQOnOgTcJAAzPlMLAh5AZGpRN';
+var UPDATE_INTERVAL = 5000;
 
 // SPARK variables
 var SPARK_URL_BASE = "api.spark.io";
 var SPARK_URL_PATH = "/v1/devices/";
-var SPARK_CORE_ID_A = "53ff6c065067544831120787"; // A
-var SPARK_CORE_ID_B = "48ff6d065067555009342387"; // B
-var SPARK_CORE_ID_C = "48ff6c065067555031092287"; // C
-var SPARK_CORE_ID_D = "53ff67065067544820110687"; // D
-var SPARK_CORE_ID_E = "53ff6c065067544828320187"; // E
-var SPARK_CORE_ID_F = "50ff6d065067545625570287"; // F
-var SPARK_CORE_IDS = [SPARK_CORE_ID_A, SPARK_CORE_ID_B, SPARK_CORE_ID_C, SPARK_CORE_ID_D, SPARK_CORE_ID_E, SPARK_CORE_ID_F];
+
+var SPARK_CORE_ID = "53ff6d065067544833330587"; // SOUSVIDE
+var SPARK_CORE_IDS = [SPARK_CORE_ID];
 var SPARK_CORE_ACCESS_TOKEN = "8625bb578da1b5bd235d782cf851c504fa4ca678";
-//var SPARK_FUNCTION = "presence";
-var SPARK_VARIABLE = "presence";
+
+var SPARK_VARIABLE = "temperature";
 var sparkIDCounter = 0;
 
 
@@ -45,14 +41,13 @@ app.listen(port, function() {
 //##############################################################################################################
 // PARSE KAISEIKU functions
 
-var className = 'Room3';
+var className = 'Temperature';
 
 function sendToParse(className, newValue, senderCore) {
 
 	// new sensor object to be stored
 	var sensor = {
-		type: 'PIR',
-		// sender: 'PIR_3',
+		type: 'SOUSVIDE',
 		coreID: senderCore,
 		value: newValue.toString()
 	};
@@ -86,7 +81,9 @@ function updateParse(className, newValue, senderCore) {
 					if (body[0].value != "undefined") {
 						if (body[0].value != newValue) {
 							console.log('New val: ' + newValue + " old: " + body[0].value);
-							sendToParse(className, newValue, senderCore);
+		
+								sendToParse(className, newValue, senderCore);
+							
 						} else {
 							console.log("No new value");
 							nextSparkCoreID();
@@ -118,7 +115,6 @@ function getSparkValue(coreID) {
 		console.log("Core number: " + sparkIDCounter);
 		console.log("statusCode: ", res.statusCode);
 
-
 		// only update of we had a successful retrieval from Spark
 		if (res.statusCode == 200) {
 			data = "";
@@ -128,7 +124,7 @@ function getSparkValue(coreID) {
 			});
 			res.on('end', function() {
 				var jsonifiedData = JSON.parse(data)
-				console.log("Presence:" + jsonifiedData.result);
+				console.log("Value:" + jsonifiedData.result);
 				console.log("Core ID: ", jsonifiedData.coreInfo.deviceID);
 				updateParse(className, jsonifiedData.result, jsonifiedData.coreInfo.deviceID);
 			});
@@ -158,8 +154,5 @@ function nextSparkCoreID() {
 // TIMER functions
 console.log("Starting timer with interval: " + UPDATE_INTERVAL);
 // get the first spark core value to kick off the polling routine
-getSparkValue(SPARK_CORE_IDS[sparkIDCounter]);
 
-// setInterval(function() {
-// 	getSparkValue(SPARK_CORE_IDS[sparkIDCounter]);
-// }, UPDATE_INTERVAL);
+getSparkValue(SPARK_CORE_IDS[sparkIDCounter]);

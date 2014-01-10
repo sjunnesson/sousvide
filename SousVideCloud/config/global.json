@@ -1,0 +1,14 @@
+{
+    "applications": {
+        "SousVide": {
+            "applicationId": "QvJbOzUIMLphGxYkonhtzfsa28udV7n58155MnHU", 
+            "masterKey": "e2e2juW3vFgW0k2a4p7QlejIDm15xuxbd9Y9Yj43"
+        }, 
+        "_default": {
+            "link": "SousVide"
+        }
+    }, 
+    "global": {
+        "parseVersion": "1.2.15"
+    }
+}
