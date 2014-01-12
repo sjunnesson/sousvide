@@ -1,0 +1,21 @@
+{
+  "name": "sparkHeroku",
+  "version": "0.0.0",
+  "description": "app to read and save Spark Core data",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "heroku",
+    "spark",
+    "cooking"
+  ],
+  "author": "david sjunnesson",
+  "license": "BSD-2-Clause",
+  "dependencies": {
+    "logfmt": "~0.18.1",
+    "express": "~3.4.7",
+    "kaiseki": "~0.5.3"
+  }
+}
