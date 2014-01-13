@@ -66,38 +66,15 @@ function sendToParse(className, newValue, senderCore) {
 
 function updateParse(className, newValue, senderCore) {
 	if (newValue != 'undefined' || newValue != undefined) {
-		// query with parameters
-		var params = {
-			where: {
-				coreID: senderCore
-			},
-			order: '-createdAt'
-		};
+		// the temp should never go above boiling so ignore all values above that
+		if (newValue < 150 && Math.floor(newValue) != 0) {
+			sendToParse(className, newValue, senderCore);
+			getSparkMode(SPARK_CORE_IDS[sparkIDCounter]);
 
-		kaiseki.getObjects(className, params, function(err, res, body, success) {
-			if (success) {
-				// check if this core has been identified before
-				if (body[0] != undefined) {
-					if (body[0].value != "undefined") {
-						if (body[0].value != newValue) {
-							console.log('New val: ' + newValue + " old: " + body[0].value);
-		
-								sendToParse(className, newValue, senderCore);
-							
-						} else {
-							console.log("No new value");
-							nextSparkCoreID();
-						}
-					}
-				} else {
-					// a new core has been found so add it without checking for previous value
-					console.log("Core ID not found so adding it to Parse");
-					sendToParse(className, newValue, senderCore);
-				}
-			} else {
-				console.log("Failed fetching data from Parse");
-			}
-		});
+		} else {
+			console.log("Strange value found so ignoring it...");
+			nextSparkCoreID();
+		}
 	}
 }
 
@@ -112,7 +89,7 @@ function getSparkValue(coreID) {
 	//console.log("Getting spark core id: "+ sparkIDCounter);
 	https.get("https://api.spark.io/v1/devices/" + coreID + "/" + SPARK_VARIABLE + "?access_token=" + SPARK_CORE_ACCESS_TOKEN, function(res) {
 		console.log("--------------------------------------------");
-		console.log("Core number: " + sparkIDCounter);
+		//console.log("Core number: " + sparkIDCounter);
 		console.log("statusCode: ", res.statusCode);
 
 		// only update of we had a successful retrieval from Spark
@@ -127,9 +104,31 @@ function getSparkValue(coreID) {
 				console.log("Value:" + jsonifiedData.result);
 				console.log("Core ID: ", jsonifiedData.coreInfo.deviceID);
 				updateParse(className, jsonifiedData.result, jsonifiedData.coreInfo.deviceID);
+				//updateParse(className, 0.00, jsonifiedData.coreInfo.deviceID);
 			});
 		} else {
 			nextSparkCoreID();
+		}
+	}).on('error', function(e) {
+		console.log(e);
+	});
+}
+
+function getSparkMode(coreID) {
+	//console.log("Getting spark core id: "+ sparkIDCounter);
+	https.get("https://api.spark.io/v1/devices/" + coreID + "/getMode?access_token=" + SPARK_CORE_ACCESS_TOKEN, function(res) {
+
+		// only update of we had a successful retrieval from Spark
+		if (res.statusCode == 200) {
+			data = "";
+			res.on('data', function(d) {
+				data += d;
+				//	process.stdout.write(d);
+			});
+			res.on('end', function() {
+				var jsonifiedData = JSON.parse(data);
+				console.log("Mode: " + jsonifiedData.result);
+			});
 		}
 	}).on('error', function(e) {
 		console.log(e);
@@ -144,7 +143,7 @@ function nextSparkCoreID() {
 	} else {
 		sparkIDCounter = 0;
 		setTimeout(function() {
-			console.log("####################################################################################")
+			console.log("#####################################################################")
 			getSparkValue(SPARK_CORE_IDS[sparkIDCounter]);
 		}, UPDATE_INTERVAL);
 	}

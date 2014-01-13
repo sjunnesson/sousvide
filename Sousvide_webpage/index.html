@@ -45,29 +45,30 @@
     <!-- main container for the cooking chart -->
     <div class="container">
         <div id="cookingChart" class="demo-placeholder" style="width:600px;height:300px"></div>
-        <br>
+        
+      
+
+<div class="col-lg-6">
+    <div id="targetTempID">Target temp:</div>
+    <div id="lastTempID">Last temp:</div>
+  </div>
+  <br>
+  <br>
      <p>
-        <button type="button" id="startBtn" class="btn btn-lg btn-success">Start</button>
-        <button type="button" id="stopBtn" class="btn btn-lg  btn-danger">Stop</button>
+        <button type="button" id="controllBtn" class="btn btn-default">Start</button>
     </p>
       
       
-   <div class="row">
-  <div class="col-lg-6">
-    <div class="input-group">
-      <span class="input-group-btn">
-        <button  id="setTargetBtn" class="btn btn-default" type="button">Set target temperature:</button>
-      </span>
-      <input type="text" class="form-control">
-    </div><!-- /input-group -->
-  </div><!-- /.col-lg-6 -->
-  <br>
-  <br>
-       <!-- <button type="button" id="autoTuneBtn" class="btn btn-lg btn-default">Auto Tune</button>-->
-
-
+    <div class="row">
+        <div class="col-lg-1">
+            <div class="input">
+                <input id="targetTempField" type="text" class="form-control">
+            </div><!-- /input-group -->
+            <button  id="setTargetBtn" class="btn btn-default" type="button">Set target temperature</button>
+        </div><!-- /.col-lg-6 -->   
     </div>
 
+   <!-- /.col-lg-6 -->
     <!-- /.container -->
 
 

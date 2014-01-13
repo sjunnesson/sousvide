@@ -1,4 +1,4 @@
-var updateInterval = 5000;
+var updateInterval = 1000;
 
 $(function() {
 
@@ -6,7 +6,7 @@ $(function() {
 		series: {
 			shadowSize: 0 // Drawing is faster without shadows
 		},
-		
+
 		xaxis: {
 			show: false
 		},
@@ -15,9 +15,13 @@ $(function() {
 
 	function update() {
 
-		plot.setData([getTempData()]);
+		var tempArray = getTempData();
+		if (tempArray.length > 0) {
+			console.log(tempArray[tempArray.length - 1][1]);
+			$("#lastTempID").text("Last temp: " + tempArray[tempArray.length - 1][1]);
+		}
+		plot.setData([tempArray]);
 
-		// Since the axes don't change, we don't need to call 
 		plot.setupGrid();
 		plot.draw();
 		setTimeout(update, updateInterval);
