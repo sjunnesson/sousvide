@@ -1,5 +1,5 @@
 var SPARK_CORE_ID = "53ff6d065067544833330587";
-var SPARk_API_TOKEN = "8625bb578da1b5bd235d782cf851c504fa4ca678";
+var SPARk_API_TOKEN = "9361a0c736aa7802813f985f1d08f23206adcd23";
 var machineMode = 0;
 
 $('#autoTuneBtn').on('click', function(e) {
