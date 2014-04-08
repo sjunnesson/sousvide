@@ -1,4 +1,4 @@
-Parse.initialize("QvJbOzUIMLphGxYkonhtzfsa28udV7n58155MnHU", "87AcQFBUPOPsCXcsn5SG5acuH5VfGLDab4HKgW2K");
+Parse.initialize("cm3U67mf6vv0qI53OG9ZEUwhy2LV6gFSL7uvC1IO", "hF70381LfP74FecVPUMgLyoWfrl0DXNvzAkxqyEi");
 var tempData = [];
 var chartData = [];
 

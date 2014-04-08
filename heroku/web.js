@@ -6,17 +6,17 @@ var https = require('https');
 
 
 // PARSE variables 
-var APP_ID = 'QvJbOzUIMLphGxYkonhtzfsa28udV7n58155MnHU';
-var REST_API_KEY = 'C6oYtNXc7Hd135iLQOnOgTcJAAzPlMLAh5AZGpRN';
+var APP_ID = 'cm3U67mf6vv0qI53OG9ZEUwhy2LV6gFSL7uvC1IO';
+var REST_API_KEY = 'WHx5ILzEtl21oZHkAT7R68VZFKQ3jjHBaE4nKeB4';
 var UPDATE_INTERVAL = 5000;
 
 // SPARK variables
 var SPARK_URL_BASE = "api.spark.io";
 var SPARK_URL_PATH = "/v1/devices/";
 
-var SPARK_CORE_ID = "53ff6d065067544833330587"; // SOUSVIDE
+var SPARK_CORE_ID = "51ff6c065067545715380687"; // SOUSVIDE
 var SPARK_CORE_IDS = [SPARK_CORE_ID];
-var SPARK_CORE_ACCESS_TOKEN = "8625bb578da1b5bd235d782cf851c504fa4ca678";
+var SPARK_CORE_ACCESS_TOKEN = "9361a0c736aa7802813f985f1d08f23206adcd23";
 
 var SPARK_VARIABLE = "temperature";
 var sparkIDCounter = 0;
